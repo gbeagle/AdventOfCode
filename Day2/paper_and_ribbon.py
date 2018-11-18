@@ -1,7 +1,7 @@
 def convertDimensionsToNumbers(dimensions):
     dim = dimensions.split('x')
-    dim = [int(num) for num in dim]
-    return dim
+    LWH = [int(num) for num in dim]
+    return LWH
 
 def wrapping_paper_needed(dimensions):
     (length, width, height) = convertDimensionsToNumbers(dimensions)
@@ -23,19 +23,17 @@ def ribbon_length_needed(dimensions):
     return totalLength
 
 #test w/ defaults
-print wrapping_paper_needed('2x3x4')
-print wrapping_paper_needed('1x1x10')
+for dimensions in ['2x3x4', '1x1x10']:
+    print "Paper: " + str(wrapping_paper_needed(dimensions))
+    print "Ribbon: " + str(ribbon_length_needed(dimensions))
 
-print ribbon_length_needed('2x3x4')
-print ribbon_length_needed('1x1x10')
-
-totalPaperNeeded = 0  #part1
-totalRibbonNeeded = 0 #part2
+totalPaperNeeded = 0
+totalRibbonNeeded = 0
 with open('Day2Inputs.txt') as f:
     for line in f:
         dimensions = line.rstrip('\n')
-        totalPaperNeeded = totalPaperNeeded + wrapping_paper_needed(dimensions)
-        totalRibbonNeeded = totalRibbonNeeded + ribbon_length_needed(dimensions)
+        totalPaperNeeded += wrapping_paper_needed(dimensions)
+        totalRibbonNeeded += ribbon_length_needed(dimensions)
 
 print "Paper: " + str(totalPaperNeeded)
 print "Ribbon: " + str(totalRibbonNeeded)
