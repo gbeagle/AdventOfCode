@@ -1,9 +1,11 @@
+from itertools import combinations
+
 sym = 'abcdefghijklmnopqrstuvwxyz'
 
 twiceLetters = 0
 thriceLetters = 0
 
-data = [n for n in open('day2inputs.txt').readlines()]
+data = [n for n in open('2018day2inputs.txt').readlines()]
 
 for id in data:
     twice = False
@@ -22,3 +24,18 @@ for id in data:
 print twiceLetters
 print thriceLetters
 print twiceLetters * thriceLetters
+
+for id1, id2 in combinations(data, 2):
+    diff = 0
+    diffChars = []
+    total = len(id1)
+    for n, ch in enumerate(id1):
+        if ch != id2[n]:
+            diff += 1
+            continue
+        diffChars.append(id1[n])
+    if diff == 1:
+        print id1
+        print id2
+        print ''.join(diffChars)
+        break
